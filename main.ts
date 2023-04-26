@@ -1,6 +1,7 @@
 let Velocidad = 40
 basic.forever(function () {
     if (maqueen.Ultrasonic(PingUnit.Centimeters) > 10) {
+        music.setVolume(0)
         maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
         maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)
         if (maqueen.readPatrol(maqueen.Patrol.PatrolLeft) == 0 && maqueen.readPatrol(maqueen.Patrol.PatrolRight) == 0) {
@@ -15,8 +16,10 @@ basic.forever(function () {
             maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, Velocidad)
         }
     } else {
+        music.setVolume(127)
         maqueen.motorStop(maqueen.Motors.All)
         maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOn)
         maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOn)
+        music.playMelody("F F F F F F F F ", 150)
     }
 })
